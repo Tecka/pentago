@@ -1,5 +1,5 @@
-import sys
-import math
+from Queue import Queue
+from threading import Thread
 import random
 import copy
 from fastapi.middleware.cors import CORSMiddleware
@@ -46,6 +46,12 @@ class Move():
 
     def __getitem__(self, key):
         return getattr(self, key)
+
+
+def do_stuff(q):
+  while True:
+    print(q.get())
+    q.task_done()
 
 @app.post("/state")
 async def root(state: GameStateRequest):
